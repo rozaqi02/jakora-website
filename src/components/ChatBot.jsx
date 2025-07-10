@@ -53,57 +53,93 @@ function ChatBot() {
       <AnimatePresence>
         {isOpen ? (
           <motion.div
-            className="bg-white rounded-lg shadow-xl w-80"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          >
-            <div className="flex justify-between items-center p-3 bg-[#4a704a] text-white rounded-t-lg">
-              <span className="flex items-center gap-2"><FaRobot /> Grok Bot</span>
-              <motion.button onClick={() => setIsOpen(false)} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <FaTimes />
-              </motion.button>
-            </div>
-            <div ref={chatContainerRef} className="p-3 h-64 overflow-y-auto space-y-2">
-              <AnimatePresence>
-                {messages.map((msg, i) => (
-                  <motion.div
-                    key={i}
-                    layout
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`text-sm p-2 rounded max-w-[80%] ${msg.sender === 'user' ? 'bg-[#4a704a] self-end ml-auto' : 'bg-gray-100 self-start mr-auto'}`}
-                  >
-                    {msg.text}
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-            <form onSubmit={sendMessage} className="flex border-t border-gray-300">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ketik pesan..."
-                className="flex-1 p-2 border-none focus:outline-none"
-              />
-              <button type="submit" className="p-2 bg-[#4a704a] text-white">
-                Kirim
-              </button>
-            </form>
-          </motion.div>
+  className="bg-white rounded-lg shadow-xl w-96" // lebar diperbesar
+  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+  animate={{ opacity: 1, y: 0, scale: 1 }}
+  exit={{ opacity: 0, y: 20, scale: 0.95 }}
+>
+  <div className="flex justify-between items-center p-3 bg-[#4a704a] text-white rounded-t-lg">
+    <span className="flex items-center gap-2">
+      <FaRobot /> Grok Bot
+    </span>
+    <motion.button
+      onClick={() => setIsOpen(false)}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <FaTimes />
+    </motion.button>
+  </div>
+  <div
+    ref={chatContainerRef}
+    className="p-3 h-80 overflow-y-auto space-y-2" // tinggi diperbesar
+  >
+    <AnimatePresence>
+      {messages.map((msg, i) => (
+        <motion.div
+          key={i}
+          layout
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`text-sm p-2 rounded max-w-[80%] ${
+            msg.sender === 'user'
+              ? 'bg-[#4a704a] self-end ml-auto text-white'
+              : 'bg-gray-100 self-start mr-auto'
+          }`}
+        >
+          {msg.text}
+        </motion.div>
+      ))}
+    </AnimatePresence>
+  </div>
+  <form onSubmit={sendMessage} className="flex border-t border-gray-300">
+    <input
+      type="text"
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      placeholder="Ketik pesan..."
+      className="flex-1 p-2 border-none focus:outline-none"
+    />
+    <button type="submit" className="p-2 bg-[#4a704a] text-white">
+      Kirim
+    </button>
+  </form>
+</motion.div>
+
         ) : (
           <motion.button
-            className="bg-[#4a704a] text-white p-4 rounded-full shadow-lg hover:bg-[#355e3b]"
             onClick={() => setIsOpen(true)}
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.9 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ backgroundImage: `url('/assets/images/logo-chatbot.png')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            className="relative w-16 h-16 rounded-full shadow-2xl flex items-center justify-center bg-[#4a704a]"
+            whileHover={{ scale: 1.1, rotate: 6 }}
+            whileTap={{ scale: 0.95, backgroundColor: '#ffffff' }}
           >
-            {/* Placeholder kosong agar gambar muncul sebagai latar belakang */}
+            {/* Logo Jakora */}
+            <div
+              className="w-10 h-10 bg-cover bg-center z-10"
+              style={{
+                backgroundImage: `url('/assets/images/logo-chatbot.png')`,
+              }}
+            ></div>
+
+            {/* Tail bubble bawah */}
+            <div
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 w-4 h-4 rotate-45 shadow-2xl"
+              style={{ backgroundColor: '#4a704a' }}
+            ></div>
+
+            {/* Balon chat di atas logo */}
+            <div className="absolute -top-2 right-0 bg-white border border-gray-400 rounded-lg px-2 py-1 flex flex-col items-center">
+              <div className="flex space-x-1">
+                <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
+              </div>
+              {/* Ekor balon chat */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 w-2 h-2 bg-white border-l border-b border-gray-400 rotate-45"></div>
+            </div>
           </motion.button>
+
+
         )}
       </AnimatePresence>
     </div>

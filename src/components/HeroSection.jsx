@@ -56,62 +56,70 @@ function HeroSection() {
   };
 
   return (
-    <section id="home" className="h-screen flex items-center justify-center bg-cover bg-center relative overflow-hidden" style={{ backgroundImage: "url('/assets/images/hero-bg.jpg')" }}>
+    <section
+      id="home"
+      className="min-h-[80vh] flex items-start justify-center pt-32 bg-cover bg-center relative overflow-hidden"
+      style={{ backgroundImage: "url('/assets/images/hero-bg.jpg')" }}
+    >
       <div className="absolute inset-0 bg-white/50 dark:bg-black/60" />
-      <motion.div
-        className="container mx-auto px-6 z-10 flex flex-col md:flex-row items-center justify-between"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
-          <motion.h2
-            className="text-lg font-semibold text-[#4a704a] uppercase typing-effect"
-            variants={itemVariants}
-          >
-            {typingText}
-          </motion.h2>
-          <motion.h1
-            className="text-4xl md:text-6xl font-bold text-[#4a704a] my-4 leading-tight"
-            variants={itemVariants}
-          >
-            Produk Inovatif dan Sehat
-          </motion.h1>
-          <motion.p
-            className="text-base md:text-lg text-gray-600 dark:text-white mb-8"
-            variants={itemVariants}
-          >
-            Kewirausahaan sosial berbasis jamur guna mewujudkan Green Economy dan Ecological Sustainability di Indonesia.
-          </motion.p>
-          <motion.div variants={itemVariants}>
-            <motion.a
-              href="/produk"
-              className="inline-flex items-center gap-2 bg-[#4a704a] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#355e3b] transition-all duration-300 transform hover:scale-105"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Lihat Produknya <FaArrowRight />
-            </motion.a>
-          </motion.div>
-        </div>
         <motion.div
-          className="md:w-1/2 flex justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5, type: 'spring' }}
+            className="container mx-auto max-w-screen-xl px-6 z-10 flex flex-col md:flex-row items-center justify-center md:justify-between"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+      >
+      {/* Kiri */}
+      <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0 flex flex-col justify-center">
+        <motion.h2
+          className="text-lg font-semibold text-[#4a704a] uppercase typing-effect"
+          variants={itemVariants}
         >
-          <motion.img
-            key={currentImage}
-            src={images[currentImage]}
-            alt="Produk Jakora"
-            className="w-full max-w-md drop-shadow-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-          />
+          {typingText}
+        </motion.h2>
+        <motion.h1
+          className="text-4xl md:text-6xl font-bold text-[#4a704a] my-4 leading-tight"
+          variants={itemVariants}
+        >
+          Produk Inovatif dan Sehat
+        </motion.h1>
+        <motion.p
+          className="text-base md:text-lg text-gray-600 dark:text-white mb-8"
+          variants={itemVariants}
+        >
+          Kewirausahaan sosial berbasis jamur guna mewujudkan Green Economy dan Ecological Sustainability di Indonesia.
+        </motion.p>
+        <motion.div variants={itemVariants}>
+          <motion.a
+            href="/produk"
+            className="inline-flex items-center gap-2 bg-[#4a704a] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#355e3b] transition-all duration-300 transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Lihat Produknya <FaArrowRight />
+          </motion.a>
         </motion.div>
+      </div>
+
+      {/* Kanan */}
+      <motion.div
+        className="md:w-1/2 flex justify-center items-center"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.5, type: 'spring' }}
+      >
+        <motion.img
+          key={currentImage}
+          src={images[currentImage]}
+          alt="Produk Jakora"
+          className="w-full max-w-md drop-shadow-2xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+        />
       </motion.div>
+    </motion.div>
+
     </section>
   );
 }
